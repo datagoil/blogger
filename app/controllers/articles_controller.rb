@@ -16,8 +16,14 @@
         @article = current_user.articles.new(article_params)
         @article.save
         flash.notice = "Article '#{@article.title}' has been Created."
-        redirect_to article_path(@article)
+        redirect_to article_path(@article.id)
     end
+#idea from here  https://stackoverflow.com/questions/34562994/managing-users-in-ruby-on-rails-ownership
+    #private
+    #def article_params
+     #   params.require(:article).permit()
+    #end
+
     def destroy
         @article = Article.find(params[:id])
         @article.destroy

@@ -13,7 +13,7 @@
         @article = Article.new
     end
      def create
-        @article = Article.new(article_params)
+        @article = current_user.articles.new(article_params)
         @article.save
         flash.notice = "Article '#{@article.title}' has been Created."
         redirect_to article_path(@article)

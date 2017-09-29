@@ -1,10 +1,10 @@
 class Article < ApplicationRecord
-    has_many :comments
-    has_many :taggings
-    has_many :tags, through: :taggings
-    has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>"}
+    has_many :comments, dependent: :destroy
+    has_many :taggings, dependent: :destroy
+    has_many :tags, through: :taggings, dependent: :destroy
+    has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>"}, dependent: :destroy
     validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
-
+    #belongs_to :author, optional: :true
 
     def tag_list=(tags_string)
         tag_names = tags_string.split(",").collect{|s| s.strip.downcase}.uniq

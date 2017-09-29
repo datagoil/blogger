@@ -1,4 +1,5 @@
     class ArticlesController < ApplicationController
+    before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
     include ArticlesHelper
     def index
         @articles = Article.all
@@ -13,9 +14,12 @@
     end
      def create
         @article = Article.new(article_params)
-        @article.save
-        flash.notice = "Article '#{@article.title}' has been Created."
-        redirect_to article_path(@article)
+         if @article.save
+            flash.notice = "Article '#{@article.title}' has been Created."
+            redirect_to article_path(@article)
+        else
+         render 'new'
+        end
     end
     def destroy
         @article = Article.find(params[:id])

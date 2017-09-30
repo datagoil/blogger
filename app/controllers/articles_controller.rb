@@ -8,9 +8,12 @@
         @article = Article.find(params[:id])
         @comment = Comment.new
         @comment.article_id = @article.id
+        @author= @article.author[:username]
+
+
     end
     def new
-        @article = Article.new
+        @article = current_user.articles.new(params[:post])
     end
      def create
         @article = current_user.articles.new(article_params)

@@ -2,9 +2,12 @@ Blogger::Application.routes.draw do
 root to: 'articles#index'
 resources :articles do
     resources :comments
+    resources :authors
 end
 resources :tags
-resources :authors
+resources :authors do
+    resources :articles
+end
 resources :author_sessions, only: [ :new, :create, :destroy ]
 
 get 'login'  => 'author_sessions#new'

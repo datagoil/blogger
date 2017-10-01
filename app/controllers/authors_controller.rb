@@ -77,6 +77,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def author_params
-      params.require(:author).permit(:username, :email, :password, :password_confirmation)
+      params.require(:author).permit(:username, :email, :password, :password_confirmation, :id)
     end
 end

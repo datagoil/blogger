@@ -13,6 +13,7 @@
 
   <tbody>
     <% @authors.each do |author| %>
+      <% if author.username == current_user.username %>
       <tr>
         <td><%= author.username %></td>
         <td><%= author.email %></td>
@@ -20,6 +21,7 @@
         <td><%= link_to 'Edit', edit_author_path(author) %></td>
         <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end%>
     <% end %>
   </tbody>
 </table>
